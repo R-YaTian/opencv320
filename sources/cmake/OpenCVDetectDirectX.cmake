@@ -14,7 +14,7 @@ if(WIN32)
     OUTPUT_VARIABLE TRY_OUT
   )
   if(__VALID_DIRECTX_NV12)
-    set(HAVE_DIRECTX_NV12 ON)
+    set(HAVE_DIRECTX_NV12 OFF)
   else()
     message(STATUS "No support for DirectX NV12 format (install Windows 8 SDK)")
   endif()

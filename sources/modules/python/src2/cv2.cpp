@@ -297,8 +297,8 @@ static bool pyopencv_to(PyObject* o, Mat& m, const ArgInfo info)
         return false;
     }
 
-    int size[CV_MAX_DIM+1];
-    size_t step[CV_MAX_DIM+1];
+    int size[CV_MAX_DIM + 1]{};
+    size_t step[CV_MAX_DIM + 1]{};
     size_t elemsize = CV_ELEM_SIZE1(type);
     const npy_intp* _sizes = PyArray_DIMS(oarr);
     const npy_intp* _strides = PyArray_STRIDES(oarr);
@@ -727,7 +727,7 @@ bool pyopencv_to(PyObject* obj, String& value, const char* name)
     (void)name;
     if(!obj || obj == Py_None)
         return true;
-    char* str = PyString_AsString(obj);
+    const char* str = PyString_AsString(obj);
     if(!str)
         return false;
     value = String(str);
