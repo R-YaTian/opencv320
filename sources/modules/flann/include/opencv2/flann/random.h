@@ -106,8 +106,14 @@ public:
         size_ = n;
         for (int i = 0; i < size_; ++i) vals_[i] = i;
 
+#if (__cplusplus >= 201703L || _MSVC_LANG >= 201703L)
+        std::random_device rd;
+        std::mt19937 g(rd());
         // shuffle the elements in the array
+        std::shuffle(vals_.begin(), vals_.end(), g);
+#else
         std::random_shuffle(vals_.begin(), vals_.end());
+#endif
 
         counter_ = 0;
     }

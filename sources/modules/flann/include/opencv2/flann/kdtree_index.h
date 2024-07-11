@@ -125,7 +125,13 @@ public:
         /* Construct the randomized trees. */
         for (int i = 0; i < trees_; i++) {
             /* Randomize the order of vectors to allow for unbiased sampling. */
+#if (__cplusplus >= 201703L || _MSVC_LANG >= 201703L)
+            std::random_device rd;
+            std::mt19937 g(rd());
+            std::shuffle(vind_.begin(), vind_.end(), g);
+#else
             std::random_shuffle(vind_.begin(), vind_.end());
+#endif
             tree_roots_[i] = divideTree(&vind_[0], int(size_) );
         }
     }
